@@ -7,29 +7,19 @@
     <style>
         :root { --pink: #ff4d4d; --light-pink: #ffb3b3; --dark: #121212; }
         body { background-color: var(--dark); color: white; font-family: 'Arial', sans-serif; text-align: center; margin: 0; overflow-x: hidden; }
-        
-        /* Sections Styling */
         .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 77, 77, 0.2); border-radius: 20px; padding: 20px; margin: 25px auto; width: 85%; max-width: 400px; }
         h2 { color: var(--light-pink); font-size: 1.5rem; margin-bottom: 15px; }
-        
-        /* Lock Screen */
-        #lock-screen { position: fixed; width: 100%; height: 100%; background: #000; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        #lock-screen { position: fixed; width: 100%; height: 100%; background: #000; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; top:0; left:0; }
         input { padding: 12px; font-size: 18px; border-radius: 8px; border: 2px solid var(--pink); background: #000; color: white; text-align: center; }
         .btn { background: var(--pink); color: white; border: none; padding: 12px 30px; margin-top: 15px; border-radius: 25px; cursor: pointer; font-weight: bold; }
-
-        /* Photo Styles */
         .polaroid { background: white; padding: 10px 10px 30px 10px; margin: 20px auto; width: 280px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transform: rotate(-2deg); }
         .polaroid img { width: 100%; border: 1px solid #ddd; }
         .polaroid p { color: #333; margin-top: 10px; font-style: italic; }
-
-        /* Naye Sections Styling */
         .letter-text { font-family: 'Georgia', serif; line-height: 1.6; text-align: left; background: #fffdf0; color: #444; padding: 20px; border-radius: 10px; }
         .reason-item { background: var(--pink); padding: 10px; margin: 8px 0; border-radius: 10px; font-size: 0.9rem; cursor: pointer; }
         .bucket-item { border-left: 4px solid var(--pink); padding: 10px; margin: 10px 0; text-align: left; background: rgba(255,255,255,0.05); }
-
-        /* Easter Egg */
-        #secret-msg { display: none; margin-top: 20px; color: var(--pink); font-weight: bold; animation: fadeIn 1s; }
-        .hidden { display: none; }
+        #secret-msg { display: none; margin-top: 20px; color: var(--pink); font-weight: bold; }
+        .hidden { display: none !important; }
         #no-btn { position: absolute; transition: 0.1s; }
     </style>
 </head>
@@ -44,7 +34,6 @@
 
     <div id="main-content" class="hidden">
         <h1>Happy Valentine's Day! ❤️</h1>
-
         <div class="card">
             <p>Our story began on 20 March 2023:</p>
             <div id="count-up" style="font-size: 1.5rem; color: var(--pink); font-weight: bold;"></div>
@@ -54,76 +43,47 @@
             <h2>💌 A Letter From My Heart</h2>
             <div class="letter-text">
                 My Dearest BF,<br><br>
-                Aapke saath bitaya hua har pal mere liye bahut special hai. 20 March 2023 se lekar aaj tak, humne bahut si yaadein banayi hain. Aap mere best friend aur meri duniya ho. ❤️
+                Aapke saath bitaya hua har pal mere liye bahut special hai.
             </div>
         </div>
 
         <div class="card">
             <h2>✨ Why I Love You</h2>
-            <div class="reason-item" onclick="confettiPop(this)">1. Your beautiful smile that fixes my day.</div>
-            <div class="reason-item" onclick="confettiPop(this)">2. The way you care for me like no one else.</div>
-            <div class="reason-item" onclick="confettiPop(this)">3. Because you are simply YOU.</div>
+            <div class="reason-item" onclick="confettiPop(this)">1. Your beautiful smile.</div>
+            <div class="reason-item" onclick="confettiPop(this)">2. Your caring nature.</div>
         </div>
 
         <div class="polaroid"><img src="https://i.ibb.co/8D53fybW/IMG-20230320-202312-451.jpg"><p>Our First Date ✨</p></div>
-        <div class="polaroid" style="transform: rotate(2deg);"><img src="https://i.ibb.co/cSdBvxFd/IMG-20250816-173944-077.jpg"><p>Favorite Memory ❤️</p></div>
-
-        <div class="card">
-            <h2>✈️ Our Future Bucket List</h2>
-            <div class="bucket-item">🌟 Late night drives with no destination.</div>
-            <div class="bucket-item">🌟 Watching the sunset together.</div>
-            <div class="bucket-item">🌟 Growing old and happy with you.</div>
-        </div>
 
         <div class="card" id="q-section" style="height: 200px; position: relative;">
             <h2>Will you be my Valentine? 🌹</h2>
             <button class="btn" onclick="sayYes()">YES! ❤️</button>
-            <button class="btn" id="no-btn" onmouseover="runAway()" style="background: #444;">NO</button>
-        </div>
-
-        <div class="card">
-            <p style="font-size: 0.8rem; color: #555;">(Click the heart below 5 times for a surprise)</p>
-            <div id="heart-trigger" onclick="secretTrigger()" style="font-size: 30px; cursor: pointer;">❤️</div>
-            <div id="secret-msg">"I promise to love you more every single day. Forever yours!" 🔐</div>
+            <button class="btn" id="no-btn" onmouseover="runAway()">NO</button>
         </div>
     </div>
 
-    <audio id="loveSong" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3"></audio>
-
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        const PIN = "210123";
-        const START_DATE = "2023-03-20T00:00:00";
-        let heartClicks = 0;
-
         function unlockSite() {
-    let pinValue = document.getElementById('pinInput').value;
-    if (pinValue === "210123") {
-        document.getElementById('lock-screen').classList.add('hidden');
-        document.getElementById('main-content').classList.remove('hidden');
-        document.getElementById('loveSong').play();
-        startTimer();
-    } else { 
-        alert("Galat PIN!"); 
-    }
-}
+            const pin = document.getElementById('pinInput').value;
+            if (pin === "210123") {
+                document.getElementById('lock-screen').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                startTimer();
+            } else { alert("Galat PIN!"); }
+        }
 
         function startTimer() {
+            const startDate = new Date("2023-03-20");
             setInterval(() => {
-                const diff = new Date() - new Date(START_DATE);
+                const diff = new Date() - startDate;
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('count-up').innerHTML = days + " Days of Us";
+                document.getElementById('count-up').innerHTML = days + " Days Together";
             }, 1000);
         }
 
         function confettiPop(el) {
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            el.style.background = "#2ecc71"; // Green on click
-        }
-
-        function secretTrigger() {
-            heartClicks++;
-            if (heartClicks >= 5) { document.getElementById('secret-msg').style.display = 'block'; }
         }
 
         function runAway() {
@@ -134,7 +94,7 @@
 
         function sayYes() {
             confetti({ particleCount: 200, spread: 100 });
-            document.getElementById('q-section').innerHTML = "<h2>Best Decision Ever! I Love You! 🥰</h2>";
+            document.getElementById('q-section').innerHTML = "<h2>I Love You Too! 🥰</h2>";
         }
     </script>
 </body>
