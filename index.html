@@ -97,13 +97,16 @@
         let heartClicks = 0;
 
         function unlockSite() {
-            if (document.getElementById('pinInput').value === PIN) {
-                document.getElementById('lock-screen').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                document.getElementById('loveSong').play();
-                startTimer();
-            } else { alert("Galat PIN!"); }
-        }
+    let pinValue = document.getElementById('pinInput').value;
+    if (pinValue === "210123") {
+        document.getElementById('lock-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        document.getElementById('loveSong').play();
+        startTimer();
+    } else { 
+        alert("Galat PIN!"); 
+    }
+}
 
         function startTimer() {
             setInterval(() => {
